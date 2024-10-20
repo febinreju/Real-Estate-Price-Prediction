@@ -35,5 +35,23 @@ To get the project up and running, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/real-estate-price-prediction.git
+   git clone https://github.com/febinreju/real-estate-price-prediction.git
    cd real-estate-price-prediction
+
+
+## Model
+We used various machine learning algorithms to predict property prices, including:
+
+Linear Regression
+Random Forest
+XGBoost
+After comparing the performance of these models, the best performing model was selected based on accuracy and error metrics.
+
+## Usage
+To use the model for predictions:
+
+Run the Jupyter notebook to preprocess the dataset and train the model:
+jupyter notebook Real_Estate_Price_Prediction.ipynb
+You can then use the trained model to predict prices for new properties by providing the required input features.
+Run app.py to get the prediction
+

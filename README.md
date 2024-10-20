@@ -19,6 +19,7 @@ The dataset includes several features like:
 - Number of bedrooms and bathrooms
 - Square footage
 - Proximity to amenities (schools, parks, public transport, etc.)
+- Dataset used for this project : https://statso.io/real-estate-prediction-case-study/
 
 ## Technologies Used
 - **Python**: Main programming language
@@ -52,4 +53,5 @@ To use the model for predictions:
 - Jupyter notebook Real_Estate_Price_Prediction.ipynb
 - You can then use the trained model to predict prices for new properties by providing the required input features.
 - Run app.py to get the prediction
+
 

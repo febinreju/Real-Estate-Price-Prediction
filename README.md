@@ -89,3 +89,23 @@ Make sure you have all the necessary libraries installed:
 - streamlit
 - seaborn
 - matplotlib
+
+### Step 3 : Run the Streamlit app
+After installing the dependencies, you can run the Streamlit app
+
+### Usage
+
+Once the app is running, you will see a web interface where you can input values for:
+
+- Distance to the nearest MRT station
+- Number of convenience stores
+- Latitude
+- Longitude
+- Then, choose the currency in which you want the house price to be predicted (NTD or USD) and click "Predict." The app will display the predicted house price based on the input values.
+
+**Example**
+If the following inputs are provided:
+- Distance to MRT station: 300 meters
+- Number of convenience stores: 5
+- Latitude: 25.033
+- Longitude: 121.565

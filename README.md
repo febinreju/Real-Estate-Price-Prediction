@@ -104,8 +104,26 @@ Once the app is running, you will see a web interface where you can input values
 - Then, choose the currency in which you want the house price to be predicted (NTD or USD) and click "Predict." The app will display the predicted house price based on the input values.
 
 **Example**
+
 If the following inputs are provided:
+
 - Distance to MRT station: 300 meters
 - Number of convenience stores: 5
 - Latitude: 25.033
 - Longitude: 121.565
+
+Output be :
+
+Predicted House Price of Unit Area: 42.56 NTD
+OR
+Predicted House Price of Unit Area: 1.37 USD (if the USD option is selected:)
+
+### Future Improvements
+
+Here are some potential future improvements for this project:
+
+- Add more features to improve the accuracy of the predictions (e.g., house age, floor area).
+- Integrate more machine learning models and compare performance (e.g., Decision Trees, Random Forests).
+- Implement model evaluation directly in the app, allowing users to see how well the model performs on the test data.
+- Include additional visualizations, such as feature importance charts or geographic maps showing property prices.
+

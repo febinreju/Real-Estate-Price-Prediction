@@ -24,10 +24,24 @@ model.fit(X_train, y_train)
 st.title("Real Estate Price Prediction")
 
 # Input fields for the features
-distance_to_mrt = st.number_input('Distance to the nearest MRT station', min_value=0.0)
+distance_to_mrt = st.number_input('Distance to the nearest MRT station (in meters)', min_value=0.0)
 convenience_stores = st.number_input('Number of convenience stores', min_value=0, step=1)
-latitude = st.number_input('Latitude', min_value=0.0)
-longitude = st.number_input('Longitude', min_value=0.0)
+latitude = st.number_input('Latitude', min_value=-90.0, max_value=90.0)
+longitude = st.number_input('Longitude', min_value=-180.0, max_value=180.0)
+
+# Currency selection
+currency = st.selectbox('Select the currency:', ('INR', 'USD', 'NTD'))
+
+# Conversion rates
+conversion_rates = {
+    'INR': 1,       # Keeping INR as base
+    'USD': 0.012,   # Example conversion rate for USD
+    'NTD': 0.37     # Example conversion rate for NTD
+}
+
+# Average price per unit in INR (example values)
+average_price_per_sqft_inr = 5000  # Average price per square foot in INR
+average_price_per_cent_inr = 500000  # Average price per cent in INR
 
 # Prediction button
 if st.button('Predict'):
@@ -37,6 +51,18 @@ if st.button('Predict'):
     # Make prediction
     prediction = model.predict(input_data)
 
-    # Display the prediction result
-    st.success(f'Predicted House Price of Unit Area: {prediction[0]:.2f}')
+    # Adjust the predicted price based on the selected currency
+    if currency in ['INR', 'NTD']:  # For India and Taiwan using cents
+        predicted_price_in_inr = prediction[0] * average_price_per_cent_inr
+    else:  # For the US using square feet
+        predicted_price_in_inr = prediction[0] * average_price_per_sqft_inr
 
+    final_price = predicted_price_in_inr * conversion_rates[currency]
+
+    # Display the prediction result
+    if currency in ['INR', 'NTD']:
+        unit = "Cent"
+    else:
+        unit = "Square Foot"
+
+    st.success(f'Predicted House Price per {unit}: {final_price:.2f} {currency}')

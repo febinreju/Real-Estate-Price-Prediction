@@ -78,6 +78,14 @@ The Streamlit app provides a simple interface where users can input the required
 To run the project locally, follow these steps:
 
 ### Step 1: Clone the repository
-Clone this GitHub repository to your local machine:
-```bash
-git clone https://github.com/your-username/real-estate-price-prediction.git
+Clone this GitHub repository to your local machine
+
+### Step 2: Install dependencies
+Navigate to the project directory and install the required Python packages.
+Make sure you have all the necessary libraries installed:
+- pandas
+- numpy
+- scikit-learn
+- streamlit
+- seaborn
+- matplotlib

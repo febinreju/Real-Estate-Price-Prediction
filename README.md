@@ -1,57 +1,83 @@
-# Real Estate Price Prediction using Python
+# Real Estate Price Prediction App
 
-## Project Overview
-This project aims to predict real estate prices using machine learning. The model estimates property prices based on various features like location, size, and other relevant factors. This tool is beneficial for buyers, sellers, and investors to make informed decisions in the real estate market.
+This is a Real Estate Price Prediction application developed using Python and Streamlit. The app predicts the price of a house's unit area based on various features such as distance to the nearest MRT station, the number of convenience stores, latitude, and longitude. The model used for prediction is a Linear Regression model trained on a dataset of real estate properties in Taiwan.
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Dataset](#dataset)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
+- [Dataset Information](#dataset-information)
+- [Features](#features)
 - [Model](#model)
+- [App Interface](#app-interface)
+- [Installation Instructions](#installation-instructions)
 - [Usage](#usage)
+- [Future Improvements](#future-improvements)
 
+## Project Overview
 
-## Dataset
-The dataset includes several features like:
-- Property type (house, apartment, etc.)
-- Location (latitude, longitude)
-- Number of bedrooms and bathrooms
-- Square footage
-- Proximity to amenities (schools, parks, public transport, etc.)
-- Dataset used for this project : https://statso.io/real-estate-prediction-case-study/
+This project is focused on building a machine learning model to predict house prices based on several factors. The app is built with Streamlit, which provides an easy-to-use web interface for users to input data and get predictions. The Linear Regression model used in this project is trained on real estate data and can predict house prices per unit area in both New Taiwan Dollars (NTD) and US Dollars (USD).
 
-## Technologies Used
-- **Python**: Main programming language
-- **Pandas**: Data manipulation and analysis
-- **NumPy**: Numerical computations
-- **Scikit-learn**: Machine learning algorithms
-- **Matplotlib & Seaborn**: Data visualization
-- **Jupyter Notebook**: Development environment
+## Dataset Information
 
-## Installation
-To get the project up and running, follow these steps:
+The dataset used for this project contains information about real estate properties in Taiwan. Key variables in the dataset include:
+- **House age**: The age of the house.
+- **Distance to the nearest MRT station**: The distance from the property to the nearest MRT station, measured in meters.
+- **Number of convenience stores**: The number of convenience stores within walking distance from the property.
+- **Latitude** and **Longitude**: The geographical coordinates of the property.
+- **House price of unit area**: The actual price per unit area of the property.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/febinreju/real-estate-price-prediction.git
-   cd real-estate-price-prediction
+## Features
 
+The app allows users to input the following features to make predictions:
+- **Distance to the nearest MRT station**: Enter the distance to the nearest MRT station (in meters).
+- **Number of convenience stores**: Enter the number of convenience stores near the property.
+- **Latitude**: Enter the latitude of the property.
+- **Longitude**: Enter the longitude of the property.
+
+### Predicted Output:
+- The predicted house price of the unit area can be displayed in:
+  - **New Taiwan Dollars (NTD)** or
+  - **US Dollars (USD)**
+
+The user can choose the currency in which they wish to see the predicted price.
 
 ## Model
-We used various machine learning algorithms to predict property prices, including:
 
-- Linear Regression
-- Random Forest
-- XGBoost
-After comparing the performance of these models, the best performing model was selected based on accuracy and error metrics.
+The model used in this project is a **Linear Regression model**. The following steps were taken in training and evaluation:
+- The dataset was split into training and testing sets using an 80/20 ratio.
+- The **Linear Regression model** was fitted to the training data to learn the relationships between the features and the target variable (house price).
+- After training, predictions were made on the test set, and the model's performance was evaluated using metrics such as **Mean Squared Error (MSE)** and **R-squared (R²)**.
 
-## Usage
-To use the model for predictions:
+### Visualizations:
 
-- Run the Jupyter notebook to preprocess the dataset and train the model:
-- Jupyter notebook Real_Estate_Price_Prediction.ipynb
-- You can then use the trained model to predict prices for new properties by providing the required input features.
-- Run app.py to get the prediction
+Several data visualizations were generated to help understand the dataset:
+- **Histograms**: Distribution of house age, distance to MRT station, number of convenience stores, latitude, longitude, and house price.
+- **Scatter plots**: Relationships between individual features and the house price of the unit area.
+- **Correlation matrix**: A heatmap showing the correlation between different numeric features.
 
+## App Interface
 
+The Streamlit app provides a simple interface where users can input the required data to make predictions. Here is how it works:
+
+1. **Input Fields**:
+   - Distance to the nearest MRT station (in meters)
+   - Number of convenience stores nearby
+   - Latitude of the property
+   - Longitude of the property
+
+2. **Currency Selection**:
+   - Users can choose whether they want the house price prediction in **New Taiwan Dollars (NTD)** or **US Dollars (USD)**.
+
+3. **Prediction Button**:
+   - After entering the values, the user can click the "Predict" button to get the predicted house price.
+
+4. **Prediction Output**:
+   - The predicted house price is displayed in the selected currency format.
+
+## Installation Instructions
+
+To run the project locally, follow these steps:
+
+### Step 1: Clone the repository
+Clone this GitHub repository to your local machine:
+```bash
+git clone https://github.com/your-username/real-estate-price-prediction.git

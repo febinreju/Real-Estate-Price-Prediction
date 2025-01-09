@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
 # Load the dataset
-real_estate_data = pd.read_csv(r"dataset path")
+real_estate_data = pd.read_csv(r"C:\Users\febin\GitHubProjects\RealEstatePricePrediction\Real_Estate.csv")
 
 # Feature selection and target variable
 features = ['Distance to the nearest MRT station', 'Number of convenience stores', 'Latitude', 'Longitude']
@@ -24,7 +24,8 @@ model.fit(X_train, y_train)
 st.title("Real Estate Price Prediction")
 
 # Input fields for the features
-distance_to_mrt = st.number_input('Distance to the nearest MRT station (in meters)', min_value=0.0)
+distance_to_mrt_meters = st.number_input('Distance to the nearest MRT station (in meters)', min_value=0.0)
+distance_to_mrt_km = distance_to_mrt_meters / 1000  # Convert to kilometers
 convenience_stores = st.number_input('Number of convenience stores', min_value=0, step=1)
 latitude = st.number_input('Latitude', min_value=-90.0, max_value=90.0)
 longitude = st.number_input('Longitude', min_value=-180.0, max_value=180.0)
@@ -39,30 +40,36 @@ conversion_rates = {
     'NTD': 0.37     # Example conversion rate for NTD
 }
 
-# Average price per unit in INR (example values)
-average_price_per_sqft_inr = 5000  # Average price per square foot in INR
-average_price_per_cent_inr = 500000  # Average price per cent in INR
+# Price adjustment logic per cent for INR, USD, and NTD
+cent_prices = {
+    'INR': {'1_cent_min': 125000, '1_cent_max': 2700000},
+    'USD': {'1_cent_min': 1500, '1_cent_max': 32400},
+    'NTD': {'1_cent_min': 46250, '1_cent_max': 999000}
+}
 
 # Prediction button
 if st.button('Predict'):
-    # Collect the input data into a numpy array
-    input_data = np.array([[distance_to_mrt, convenience_stores, latitude, longitude]])
+    # Collect the input data into a numpy array (distance in km)
+    input_data = np.array([[distance_to_mrt_km, convenience_stores, latitude, longitude]])
 
     # Make prediction
     prediction = model.predict(input_data)
 
-    # Adjust the predicted price based on the selected currency
-    if currency in ['INR', 'NTD']:  # For India and Taiwan using cents
-        predicted_price_in_inr = prediction[0] * average_price_per_cent_inr
-    else:  # For the US using square feet
-        predicted_price_in_inr = prediction[0] * average_price_per_sqft_inr
+    # Adjust the predicted price based on cent prices (1 cent as base unit)
+    predicted_price_in_inr = prediction[0] * cent_prices['INR']['1_cent_min']  # Using minimum price per cent for INR
 
+    # Convert to selected currency
     final_price = predicted_price_in_inr * conversion_rates[currency]
 
     # Display the prediction result
-    if currency in ['INR', 'NTD']:
-        unit = "Cent"
-    else:
-        unit = "Square Foot"
+    st.success(f'Predicted House Price per Cent: {final_price:.2f} {currency}')
 
-    st.success(f'Predicted House Price per {unit}: {final_price:.2f} {currency}')
+# Streamlit description
+st.info("""
+This Real Estate Price Prediction app estimates property prices based on local cent-based pricing. 
+It converts distance inputs from meters to kilometers for accuracy and supports predictions in INR, USD, and NTD.
+The price ranges vary based on locality:
+- INR: ₹1.25 lakh to ₹27 lakh per cent (India)
+- USD: $1,500 to $32,400 per cent (USA)
+- NTD: NT$46,250 to NT$999,000 per cent (Taiwan)
+""")
